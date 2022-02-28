@@ -1,0 +1,30 @@
+Project CMSContent {
+  database_type: 'PostgreSQL'
+}
+Table users {
+  id int [pk, increment] 
+  email varchar
+  password varchar
+}
+Table events {
+  id int [pk, increment]
+  title varchar
+  userId int [ref: > users.id]
+}
+Table screens {
+  id int  [pk, increment]
+  name varchar
+  eventId int [ref: > events.id]
+  playlistId int [ref: - playlists.id]
+}
+
+Table playlists {
+   id int [pk, increment]
+   title varchar
+   screenId int [ref: - screens.id]
+}
+Table contents {
+  id int [pk, increment]
+  duration float
+  playlistId int [ref: > playlists.id]
+}
