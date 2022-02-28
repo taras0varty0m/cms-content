@@ -1,4 +1,5 @@
 import { Event } from "src/events/entities/event.entity";
+import { Playlist } from "src/playlists/entities/playlist.entity";
 import {
   BaseEntity,
   Column,
@@ -17,4 +18,13 @@ export class Screen extends BaseEntity {
 
   @ManyToOne(() => Event, (event) => event.screens, { onDelete: "CASCADE" })
   event: Event;
+
+  @ManyToOne(() => Playlist, (playlist) => playlist.screens, {
+    onUpdate: "CASCADE",
+    onDelete: "RESTRICT",
+  })
+  playlist: Playlist;
+
+  @Column()
+  playlistId: string;
 }

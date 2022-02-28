@@ -1,11 +1,14 @@
+import { Playlist } from "src/playlists/entities/playlist.entity";
 import { Screen } from "src/screens/entities/screen.entity";
 import { User } from "src/users/entities/user.entity";
 import {
   BaseEntity,
   Column,
   Entity,
+  JoinTable,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
