@@ -21,6 +21,13 @@ import { RequestUserDto } from "src/users/dto/request-user.dto";
     create: CreatePlaylistDto,
     update: UpdatePlaylistDto,
   },
+  params: {
+    id: {
+      field: "id",
+      type: "uuid",
+      primary: true,
+    },
+  },
   query: {
     join: {
       contents: {

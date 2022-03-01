@@ -1,4 +1,4 @@
-import { Event } from "src/events/entities/event.entity";
+import { Content } from "src/contents/entities/content.entity";
 import { Screen } from "src/screens/entities/screen.entity";
 import { User } from "src/users/entities/user.entity";
 import {
@@ -7,9 +7,9 @@ import {
   PrimaryGeneratedColumn,
   OneToOne,
   Column,
-  JoinColumn,
   ManyToOne,
   JoinTable,
+  ManyToMany,
 } from "typeorm";
 
 @Entity()
@@ -24,7 +24,6 @@ export class Playlist extends BaseEntity {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
-  @JoinColumn()
   user?: User;
 
   @Column()
@@ -33,4 +32,9 @@ export class Playlist extends BaseEntity {
   @OneToOne(() => Screen, (screen) => screen.playlist)
   @JoinTable()
   screen?: Screen;
+
+  @ManyToMany(() => Content, (content) => content.playlists, {
+    eager: true,
+  })
+  contents: Content[];
 }
