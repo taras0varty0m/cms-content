@@ -5,7 +5,9 @@ import { CreatePlaylistDto } from "./create-playlist.dto";
 export class PlaylistDto extends PartialType(CreatePlaylistDto) {
   id: string;
 
+  title: string;
+
   @Exclude()
   @ApiHideProperty()
-  userId: number;
+  userId: string;
 }

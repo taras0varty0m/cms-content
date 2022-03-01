@@ -9,12 +9,12 @@ import {
   Column,
   JoinColumn,
   ManyToOne,
-  OneToMany,
+  JoinTable,
 } from "typeorm";
 
 @Entity()
 export class Playlist extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({ nullable: false, length: 32 })
@@ -25,11 +25,12 @@ export class Playlist extends BaseEntity {
     onDelete: "CASCADE",
   })
   @JoinColumn()
-  user: User;
+  user?: User;
 
   @Column()
   userId: string;
 
-  @OneToMany(() => Screen, (screen) => screen.playlist)
-  screens: Screen[];
+  @OneToOne(() => Screen, (screen) => screen.playlist)
+  @JoinTable()
+  screen?: Screen;
 }

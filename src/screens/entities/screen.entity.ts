@@ -5,6 +5,7 @@ import {
   Column,
   Entity,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
@@ -17,14 +18,8 @@ export class Screen extends BaseEntity {
   eventId: string;
 
   @ManyToOne(() => Event, (event) => event.screens, { onDelete: "CASCADE" })
-  event: Event;
+  event?: Event;
 
-  @ManyToOne(() => Playlist, (playlist) => playlist.screens, {
-    onUpdate: "CASCADE",
-    onDelete: "RESTRICT",
-  })
-  playlist: Playlist;
-
-  @Column()
-  playlistId: string;
+  @OneToOne(() => Playlist, (playlist) => playlist.screen)
+  playlist?: Playlist;
 }

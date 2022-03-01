@@ -23,10 +23,10 @@ export class Event extends BaseEntity {
   @OneToMany(() => Screen, (screen) => screen.event, {
     cascade: true,
   })
-  screens: Screen[];
+  screens?: Screen[];
 
   @ManyToOne(() => User, (user) => user.events, { onDelete: "CASCADE" })
-  user: User;
+  user?: User;
 
   @Column()
   userId: string;

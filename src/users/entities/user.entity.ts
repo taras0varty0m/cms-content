@@ -26,7 +26,7 @@ export class User extends BaseEntity {
   @OneToMany(() => Event, (event) => event.user, {
     cascade: true,
   })
-  events: Event[];
+  events?: Event[];
 
   @BeforeInsert()
   @BeforeUpdate()

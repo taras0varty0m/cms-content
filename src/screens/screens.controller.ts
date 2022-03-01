@@ -43,7 +43,13 @@ import { UpdateScreenDto } from "./dto/update-screen.dto";
     },
   },
   routes: {
-    createOneBase: {
+    updateOneBase: {
+      decorators: [UseGuards(EditScreensGuard)],
+    },
+    deleteOneBase: {
+      decorators: [UseGuards(EditScreensGuard)],
+    },
+    replaceOneBase: {
       decorators: [UseGuards(EditScreensGuard)],
     },
   },

@@ -5,7 +5,9 @@ import { CreateEventDto } from "./create-event.dto";
 export class EventDto extends PartialType(CreateEventDto) {
   id: string;
 
+  title: string;
+
   @Exclude()
   @ApiHideProperty()
-  userId: number;
+  userId: string;
 }
