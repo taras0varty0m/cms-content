@@ -1,14 +1,18 @@
-import { IsNotEmpty, IsString, IsNumber } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, IsString, IsNumber, IsDefined } from "class-validator";
 
 export class CreateContentDto {
   @IsNotEmpty()
   @IsString()
-  name: string;
+  href: string;
 
   @IsNotEmpty()
   @IsString()
-  extension: string;
+  playlistId: string;
 
   @IsNumber()
+  @IsNotEmpty()
+  @IsDefined()
+  @ApiProperty()
   duration: number;
 }

@@ -24,7 +24,7 @@ export class Playlist extends BaseEntity {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
-  user?: User;
+  user: User;
 
   @Column()
   userId: string;

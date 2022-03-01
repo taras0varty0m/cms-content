@@ -18,7 +18,7 @@ export class Screen extends BaseEntity {
   eventId: string;
 
   @ManyToOne(() => Event, (event) => event.screens, { onDelete: "CASCADE" })
-  event?: Event;
+  event: Event;
 
   @OneToOne(() => Playlist, (playlist) => playlist.screen)
   playlist?: Playlist;

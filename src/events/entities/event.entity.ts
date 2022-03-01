@@ -26,7 +26,7 @@ export class Event extends BaseEntity {
   screens?: Screen[];
 
   @ManyToOne(() => User, (user) => user.events, { onDelete: "CASCADE" })
-  user?: User;
+  user: User;
 
   @Column()
   userId: string;

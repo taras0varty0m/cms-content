@@ -16,19 +16,16 @@ export class Content extends BaseEntity {
   id: string;
 
   @Column()
-  name: string;
+  duration: number;
 
   @Column()
-  extension: string;
-
-  @Column({ nullable: true })
-  duration: number;
+  href: string;
 
   @ManyToOne(() => User, (user) => user.id, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
-  user?: User;
+  user: User;
 
   @Column()
   userId: string;
@@ -36,4 +33,7 @@ export class Content extends BaseEntity {
   @ManyToMany(() => Playlist, (playlist) => playlist.contents)
   @JoinTable()
   playlists: Playlist[];
+
+  @Column()
+  playlistId: string;
 }
