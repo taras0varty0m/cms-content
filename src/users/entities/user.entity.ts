@@ -10,6 +10,7 @@ import {
 import * as bcrypt from "bcryptjs";
 import { Exclude } from "class-transformer";
 import { Event } from "src/events/entities/event.entity";
+import { Content } from "src/contents/entities/content.entity";
 
 @Entity()
 export class User extends BaseEntity {
@@ -27,6 +28,9 @@ export class User extends BaseEntity {
     cascade: true,
   })
   events?: Event[];
+
+  @OneToMany(() => Content, (content) => content.user)
+  contents?: Content[];
 
   @BeforeInsert()
   @BeforeUpdate()

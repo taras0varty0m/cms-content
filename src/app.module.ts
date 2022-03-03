@@ -4,10 +4,11 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
-import { EventsModule } from './events/events.module';
-import { ScreensModule } from './screens/screens.module';
-import { PlaylistsModule } from './playlists/playlists.module';
-import { ContentsModule } from './contents/contents.module';
+import { EventsModule } from "./events/events.module";
+import { ScreensModule } from "./screens/screens.module";
+import { PlaylistsModule } from "./playlists/playlists.module";
+import { ContentsModule } from "./contents/contents.module";
+import { PlaylistContentModule } from "./playlist-content/playlist-content.module";
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { ContentsModule } from './contents/contents.module';
     ScreensModule,
     PlaylistsModule,
     ContentsModule,
+    PlaylistContentModule,
   ],
 })
 export class AppModule {}

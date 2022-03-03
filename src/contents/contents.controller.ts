@@ -1,7 +1,8 @@
 import { Controller, UseGuards } from "@nestjs/common";
 import { ApiTags, ApiBearerAuth } from "@nestjs/swagger";
-import { Crud, CrudController } from "@nestjsx/crud";
+import { Crud, CrudAuth, CrudController } from "@nestjsx/crud";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
+import { RequestUserDto } from "src/users/dto/request-user.dto";
 import { ContentsService } from "./contents.service";
 import { CreateEventScreenContentGuard } from "./create-event-screen-playlist-content.guard";
 import { ContentDto } from "./dto/content.dto";
@@ -26,18 +27,10 @@ import { Content } from "./entities/content.entity";
       type: "uuid",
       primary: true,
     },
-    userId: {
-      type: "uuid",
-      primary: false,
-      field: "userId",
-    },
   },
 
   routes: {
     exclude: ["createManyBase", "recoverOneBase", "updateOneBase"],
-    createOneBase: {
-      decorators: [UseGuards(CreateEventScreenContentGuard)],
-    },
     replaceOneBase: {
       decorators: [UseGuards(EditContentsGuard)],
     },
@@ -46,10 +39,18 @@ import { Content } from "./entities/content.entity";
     },
   },
 })
+@CrudAuth({
+  property: "user",
+  filter: (user: RequestUserDto) => ({ userId: user.id }),
+  persist: (user: RequestUserDto) => ({
+    userId: user.id,
+    href: `${Math.random() * 1e10}`,
+  }),
+})
 @ApiTags("contents")
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard)
-@Controller("users/:userId/contents")
+@Controller("contents")
 export class ContentsController implements CrudController<Content> {
   constructor(public service: ContentsService) {}
 }

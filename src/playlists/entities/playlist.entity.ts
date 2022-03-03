@@ -1,4 +1,5 @@
 import { Content } from "src/contents/entities/content.entity";
+import { PlaylistContent } from "src/playlist-content/entities/playlist-content.entity";
 import { Screen } from "src/screens/entities/screen.entity";
 import { User } from "src/users/entities/user.entity";
 import {
@@ -10,6 +11,7 @@ import {
   ManyToOne,
   JoinTable,
   ManyToMany,
+  OneToMany,
 } from "typeorm";
 
 @Entity()
@@ -17,7 +19,7 @@ export class Playlist extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ nullable: false, length: 32 })
+  @Column()
   title: string;
 
   @ManyToOne(() => User, (user) => user.id, {
@@ -33,8 +35,9 @@ export class Playlist extends BaseEntity {
   @JoinTable()
   screen?: Screen;
 
-  @ManyToMany(() => Content, (content) => content.playlists, {
-    eager: true,
-  })
-  contents: Content[];
+  @OneToMany(
+    () => PlaylistContent,
+    (playlistContent) => playlistContent.playlist
+  )
+  contents?: PlaylistContent[];
 }

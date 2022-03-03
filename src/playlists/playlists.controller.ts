@@ -28,13 +28,6 @@ import { RequestUserDto } from "src/users/dto/request-user.dto";
       primary: true,
     },
   },
-  query: {
-    join: {
-      contents: {
-        eager: true,
-      },
-    },
-  },
   routes: {
     updateOneBase: {
       decorators: [UseGuards(EditPlaylistsGuard)],
