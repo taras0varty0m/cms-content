@@ -1,4 +1,4 @@
-import { IsDefined, IsNumber } from "class-validator";
+import { IsDefined } from "class-validator";
 
 export class CreateScreenDto {
   @IsDefined()

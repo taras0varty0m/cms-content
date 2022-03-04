@@ -4,5 +4,6 @@ import { define } from "typeorm-seeding";
 define(User, (faker) => {
   const user = new User();
   user.email = faker.internet.email();
+  user.password = faker.random.word();
   return user;
 });

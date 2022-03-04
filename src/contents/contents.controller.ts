@@ -4,7 +4,6 @@ import { Crud, CrudAuth, CrudController } from "@nestjsx/crud";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { RequestUserDto } from "src/users/dto/request-user.dto";
 import { ContentsService } from "./contents.service";
-import { CreateEventScreenContentGuard } from "./create-event-screen-playlist-content.guard";
 import { ContentDto } from "./dto/content.dto";
 import { CreateContentDto } from "./dto/create-content.dto";
 import { UpdateContentDto } from "./dto/update-content.dto";

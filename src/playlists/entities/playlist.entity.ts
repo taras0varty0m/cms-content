@@ -1,4 +1,3 @@
-import { Content } from "src/contents/entities/content.entity";
 import { PlaylistContent } from "src/playlist-content/entities/playlist-content.entity";
 import { Screen } from "src/screens/entities/screen.entity";
 import { User } from "src/users/entities/user.entity";
@@ -10,7 +9,6 @@ import {
   Column,
   ManyToOne,
   JoinTable,
-  ManyToMany,
   OneToMany,
 } from "typeorm";
 

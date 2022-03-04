@@ -1,12 +1,9 @@
 import { PlaylistContent } from "src/playlist-content/entities/playlist-content.entity";
-import { Playlist } from "src/playlists/entities/playlist.entity";
 import { User } from "src/users/entities/user.entity";
 import {
   BaseEntity,
   Column,
   Entity,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,

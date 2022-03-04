@@ -5,7 +5,6 @@ import {
   HttpException,
   HttpStatus,
   Injectable,
-  Logger,
 } from "@nestjs/common";
 import { ScreensRepository } from "./screens.repository";
 
