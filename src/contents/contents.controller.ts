@@ -12,12 +12,14 @@ import { Content } from "./entities/content.entity";
 
 @Crud({
   model: {
-    type: ContentDto,
+    type: Content,
   },
 
-  dto: {
+  serialize: {
     create: CreateContentDto,
+    update: UpdateContentDto,
     replace: UpdateContentDto,
+    get: ContentDto,
   },
 
   params: {
@@ -29,7 +31,7 @@ import { Content } from "./entities/content.entity";
   },
 
   routes: {
-    exclude: ["createManyBase", "recoverOneBase", "updateOneBase"],
+    exclude: ["recoverOneBase"],
     replaceOneBase: {
       decorators: [UseGuards(EditContentsGuard)],
     },
@@ -40,7 +42,6 @@ import { Content } from "./entities/content.entity";
 })
 @CrudAuth({
   property: "user",
-  filter: (user: RequestUserDto) => ({ userId: user.id }),
   persist: (user: RequestUserDto) => ({
     userId: user.id,
     href: `${Math.random() * 1e10}`,

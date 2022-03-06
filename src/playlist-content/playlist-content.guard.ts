@@ -21,25 +21,11 @@ export class EditPlaylistContentGuard implements CanActivate {
       }
     );
 
-    if (!playlistContent.content) {
-      throw new HttpException(
-        `Content with ID=${req.params.id} not found`,
-        HttpStatus.NOT_FOUND
-      );
-    }
-
-    if (!playlistContent.playlist) {
-      throw new HttpException(
-        `Playlist with ID=${req.params.id} not found`,
-        HttpStatus.NOT_FOUND
-      );
-    }
-
     const userId: string = req.user.id;
 
     if (
-      playlistContent.content.userId !== userId &&
-      playlistContent.playlist.userId !== userId
+      playlistContent?.content.userId !== userId &&
+      playlistContent?.playlist.userId !== userId
     ) {
       throw new ForbiddenException();
     }

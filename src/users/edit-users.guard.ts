@@ -16,15 +16,9 @@ export class EditUsersGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
     const user = await this.usersRepository.findOne(req.params.id);
 
-    if (!user) {
-      throw new HttpException(
-        `user with ID=${req.params.id} not found`,
-        HttpStatus.NOT_FOUND
-      );
-    }
-
     const userId: string = req.user.id;
-    if (user.id !== userId) {
+
+    if (user?.id !== userId) {
       throw new ForbiddenException();
     }
 

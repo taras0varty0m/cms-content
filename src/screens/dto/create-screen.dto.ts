@@ -1,6 +1,5 @@
-import { IsDefined } from "class-validator";
-
 export class CreateScreenDto {
-  @IsDefined()
+  id: string;
+
   playlistId: string;
 }

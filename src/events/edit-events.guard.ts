@@ -16,15 +16,9 @@ export class EditEventsGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
     const event = await this.eventsRepository.findOne(req.params.id);
 
-    if (!event) {
-      throw new HttpException(
-        `Event with ID=${req.params.id} not found`,
-        HttpStatus.NOT_FOUND
-      );
-    }
     const userId: string = req.user.id;
 
-    if (event.userId !== userId) {
+    if (event?.userId !== userId) {
       throw new ForbiddenException();
     }
 

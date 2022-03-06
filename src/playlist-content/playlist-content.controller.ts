@@ -14,11 +14,13 @@ import { PlaylistContent } from "./entities/playlist-content.entity";
 @ApiTags("playlist-content")
 @Crud({
   model: {
-    type: PlaylistContentDto,
+    type: PlaylistContent,
   },
-  dto: {
+  serialize: {
     create: CreatePlaylistContentDto,
     update: UpdatePlaylistContentDto,
+    replace: UpdatePlaylistContentDto,
+    get: PlaylistContentDto,
   },
   params: {
     id: {

@@ -18,15 +18,9 @@ export class EditScreensGuard implements CanActivate {
       relations: ["event"],
     });
 
-    if (!screen) {
-      throw new HttpException(
-        `Screen with ID=${req.params.id} not found`,
-        HttpStatus.NOT_FOUND
-      );
-    }
     const userId: string = req.user.id;
 
-    if (screen.event.userId !== userId) {
+    if (screen?.event.userId !== userId) {
       throw new ForbiddenException();
     }
 

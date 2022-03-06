@@ -15,11 +15,13 @@ import { RequestUserDto } from "src/users/dto/request-user.dto";
 @ApiTags("playlists")
 @Crud({
   model: {
-    type: PlaylistDto,
+    type: Playlist,
   },
-  dto: {
+  serialize: {
     create: CreatePlaylistDto,
     update: UpdatePlaylistDto,
+    replace: UpdatePlaylistDto,
+    get: PlaylistDto,
   },
   params: {
     id: {
@@ -42,7 +44,6 @@ import { RequestUserDto } from "src/users/dto/request-user.dto";
 })
 @CrudAuth({
   property: "user",
-  filter: (user: RequestUserDto) => ({ userId: user.id }),
   persist: (user: RequestUserDto) => ({ userId: user.id }),
 })
 @Controller("playlists")

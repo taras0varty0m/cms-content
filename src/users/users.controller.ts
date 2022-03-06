@@ -17,11 +17,10 @@ import { ResponseUserDto } from "./dto/response-user";
 @ApiTags("users")
 @Crud({
   model: {
-    type: ResponseUserDto,
+    type: User,
   },
-  dto: {
+  serialize: {
     update: UpdateUserDto,
-    replace: UpdateUserDto,
   },
   params: {
     id: {
@@ -33,9 +32,6 @@ import { ResponseUserDto } from "./dto/response-user";
   routes: {
     only: ["getOneBase", "updateOneBase", "deleteOneBase", "getManyBase"],
     updateOneBase: {
-      decorators: [UseGuards(JwtAuthGuard, EditUsersGuard), ApiBearerAuth()],
-    },
-    replaceOneBase: {
       decorators: [UseGuards(JwtAuthGuard, EditUsersGuard), ApiBearerAuth()],
     },
     deleteOneBase: {

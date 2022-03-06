@@ -16,15 +16,9 @@ export class EditContentsGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
     const content = await this.contentsRepository.findOne(req.params.id);
 
-    if (!content) {
-      throw new HttpException(
-        `Content with ID=${req.params.id} not found`,
-        HttpStatus.NOT_FOUND
-      );
-    }
     const userId: string = req.user.id;
 
-    if (content.userId !== userId) {
+    if (content?.userId !== userId) {
       throw new ForbiddenException();
     }
 

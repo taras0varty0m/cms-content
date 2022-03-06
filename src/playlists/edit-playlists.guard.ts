@@ -16,15 +16,9 @@ export class EditPlaylistsGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
     const playlist = await this.playlistsRepository.findOne(req.params.id);
 
-    if (!playlist) {
-      throw new HttpException(
-        `Playlist with ID=${req.params.id} not found`,
-        HttpStatus.NOT_FOUND
-      );
-    }
     const userId: string = req.user.id;
 
-    if (playlist.userId !== userId) {
+    if (playlist?.userId !== userId) {
       throw new ForbiddenException();
     }
 

@@ -15,11 +15,13 @@ import { UpdateScreenDto } from "./dto/update-screen.dto";
 @ApiTags("screens")
 @Crud({
   model: {
-    type: ScreenDto,
+    type: Screen,
   },
-  dto: {
+  serialize: {
     create: CreateScreenDto,
     update: UpdateScreenDto,
+    replace: UpdateScreenDto,
+    get: ScreenDto,
   },
   params: {
     eventId: {

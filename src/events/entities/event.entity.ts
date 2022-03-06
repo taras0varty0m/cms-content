@@ -1,3 +1,4 @@
+import { ApiHideProperty } from "@nestjs/swagger";
 import { Screen } from "src/screens/entities/screen.entity";
 import { User } from "src/users/entities/user.entity";
 import {
@@ -11,20 +12,24 @@ import {
 
 @Entity()
 export class Event extends BaseEntity {
+  @ApiHideProperty()
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()
   title: string;
 
+  @ApiHideProperty()
   @OneToMany(() => Screen, (screen) => screen.event, {
     cascade: true,
   })
   screens?: Screen[];
 
+  @ApiHideProperty()
   @ManyToOne(() => User, (user) => user.events, { onDelete: "CASCADE" })
-  user: User;
+  user?: User;
 
+  @ApiHideProperty()
   @Column()
   userId: string;
 }

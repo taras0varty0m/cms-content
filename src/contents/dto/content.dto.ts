@@ -4,8 +4,4 @@ import { CreateContentDto } from "./create-content.dto";
 
 export class ContentDto extends PartialType(CreateContentDto) {
   id: string;
-
-  @Exclude()
-  @ApiHideProperty()
-  userId: string;
 }
