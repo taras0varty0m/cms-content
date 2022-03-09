@@ -16,8 +16,12 @@ export class Content extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
+  @ApiHideProperty()
   @Column()
   href: string;
+
+  @Column()
+  fileKey: string;
 
   @ApiHideProperty()
   @ManyToOne(() => User, (user) => user.id, {
