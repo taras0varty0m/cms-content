@@ -9,6 +9,7 @@ import { ScreensModule } from "./screens/screens.module";
 import { PlaylistsModule } from "./playlists/playlists.module";
 import { ContentsModule } from "./contents/contents.module";
 import { PlaylistContentModule } from "./playlist-content/playlist-content.module";
+import { ContentGroupModule } from './content-group/content-group.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { PlaylistContentModule } from "./playlist-content/playlist-content.modul
     PlaylistsModule,
     ContentsModule,
     PlaylistContentModule,
+    ContentGroupModule,
   ],
 })
 export class AppModule {}
