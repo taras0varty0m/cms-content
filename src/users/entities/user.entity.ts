@@ -20,10 +20,6 @@ export class User extends BaseEntity {
   @Column({ unique: true })
   email: string;
 
-  @Exclude({ toPlainOnly: true })
-  @Column()
-  password: string;
-
   @OneToMany(() => Event, (event) => event.user, {
     cascade: true,
   })
@@ -31,14 +27,4 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Content, (content) => content.user)
   contents?: Content[];
-
-  @BeforeInsert()
-  @BeforeUpdate()
-  async hashPassword() {
-    this.password = await bcrypt.hash(this.password, 8);
-  }
-
-  async validatePassword(password: string): Promise<boolean> {
-    return await bcrypt.compare(password, this.password);
-  }
 }

@@ -15,6 +15,8 @@ async function bootstrap() {
     new FastifyAdapter()
   );
 
+  app.enableCors();
+
   app.useGlobalPipes(new ValidationPipe());
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
