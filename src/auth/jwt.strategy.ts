@@ -3,10 +3,11 @@ import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { passportJwtSecret } from "jwks-rsa";
 import { ConfigService } from "@nestjs/config";
+import { AuthService } from "./auth.service";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(configService: ConfigService) {
+  constructor(configService: ConfigService, private authService: AuthService) {
     super({
       secretOrKeyProvider: passportJwtSecret({
         cache: true,
@@ -23,7 +24,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  validate(payload: unknown) {
-    return payload;
+  async validate(payload: { "http://localhost/email": string }) {
+    const email = payload["https://localhost/email"];
+    return this.authService.validateByEmail(email);
   }
 }

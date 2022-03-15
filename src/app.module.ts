@@ -21,7 +21,6 @@ import { ContentGroupModule } from "./content-group/content-group.module";
         PASSWORD: Joi.string().required(),
         DATABASE: Joi.string().required(),
         PORT: Joi.number().required(),
-        JWT_SECRET: Joi.string().required(),
         S3_REGION: Joi.string().required(),
         S3_ACCESS_KEY: Joi.string().required(),
         S3_SECRET_KEY: Joi.string().required(),
