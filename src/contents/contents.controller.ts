@@ -59,10 +59,7 @@ import { S3Service } from "./s3.service";
       decorators: [UseInterceptors(AddHrefToResponseInterceptor)],
     },
     createOneBase: {
-      decorators: [
-        UseGuards(EditContentsGuard),
-        UseInterceptors(AddHrefToResponseInterceptor),
-      ],
+      decorators: [UseInterceptors(AddHrefToResponseInterceptor)],
     },
     replaceOneBase: {
       decorators: [

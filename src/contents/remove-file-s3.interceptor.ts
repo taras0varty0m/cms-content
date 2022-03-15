@@ -4,7 +4,7 @@ import {
   Injectable,
   NestInterceptor,
 } from "@nestjs/common";
-import { Observable, of } from "rxjs";
+import { Observable, of, tap } from "rxjs";
 import { S3Service } from "./s3.service";
 import { ContentsService } from "./contents.service";
 
@@ -21,8 +21,9 @@ export class RemoveFileS3 implements NestInterceptor {
       const { fileKey } = await this.content.findOne(contentId);
 
       try {
-        await this.s3.removeFile(fileKey);
-        return next.handle();
+        return next
+          .handle()
+          .pipe(tap(async () => await this.s3.removeFile(fileKey)));
       } catch (e) {
         context.switchToHttp().getResponse().status(500);
 
