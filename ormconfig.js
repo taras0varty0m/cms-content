@@ -4,7 +4,7 @@ module.exports = {
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
   port: process.env.PORT,
-  migrations: ["dist/database/migrations/migrations/*{.ts,.js}"],
+  migrations: ["dist/database/migrations/*{.ts,.js}"],
   entities: ["dist/**/*.entity{.ts,.js}"],
   seeds: ["dist/database/seeds/*.seed{.ts,.js}"],
   factories: ["dist/database/factories/*.factory{.ts,.js}"],
