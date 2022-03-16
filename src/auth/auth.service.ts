@@ -5,7 +5,7 @@ import { UsersRepository } from "src/users/users.repository";
 export class AuthService {
   constructor(private userRepository: UsersRepository) {}
 
-  async validateByEmail(email: string) {
+  async validateByEmailOrCreateUser(email: string) {
     let user = await this.userRepository.findOne({ where: { email } });
     if (!user) {
       user = this.userRepository.create({

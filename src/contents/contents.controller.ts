@@ -1,7 +1,7 @@
 import {
-  Body,
   Controller,
-  Post,
+  Get,
+  Query,
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
@@ -13,10 +13,7 @@ import { AddHrefToResponseInterceptor } from "./add-href-to-response.interceptor
 import { ContentsService } from "./contents.service";
 import { ContentDto } from "./dto/content.dto";
 import { CreateContentDto } from "./dto/create-content.dto";
-import {
-  GetUploadLinkDto,
-  GetUploadLinkResponseDto,
-} from "./dto/get-upload-link.dto";
+import { GetUploadLinkResponseDto } from "./dto/get-upload-link.dto";
 import { UpdateContentDto } from "./dto/update-content.dto";
 import { EditContentsGuard } from "./edit-contents.guard";
 import { Content } from "./entities/content.entity";
@@ -91,15 +88,15 @@ import { S3Service } from "./s3.service";
 export class ContentsController implements CrudController<Content> {
   constructor(public service: ContentsService, public s3: S3Service) {}
 
-  @Post("/upload")
+  @Get("/upload-s3-file-link/:filename")
   @ApiResponse({
     type: GetUploadLinkResponseDto,
     description: "Signed S3 link for file uploading",
     status: 201,
   })
   public async getUploadLink(
-    @Body() body: GetUploadLinkDto
+    @Query("filename") filename: string
   ): Promise<GetUploadLinkResponseDto> {
-    return this.s3.getSignedUploadUrl(body.filename);
+    return this.s3.getSignedUploadUrl(filename);
   }
 }

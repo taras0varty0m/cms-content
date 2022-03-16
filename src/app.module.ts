@@ -27,6 +27,7 @@ import { ContentGroupModule } from "./content-group/content-group.module";
         S3_BUCKET: Joi.string().required(),
         AUTH0_ISSUER_URL: Joi.string().required(),
         AUTH0_AUDIENCE: Joi.string().required(),
+        EMAIL_TO_ACCESS_TOKEN_LINK: Joi.string().required(),
       }),
     }),
     TypeOrmModule.forRoot(),

@@ -7,7 +7,10 @@ import { AuthService } from "./auth.service";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(configService: ConfigService, private authService: AuthService) {
+  constructor(
+    private configService: ConfigService,
+    private authService: AuthService
+  ) {
     super({
       secretOrKeyProvider: passportJwtSecret({
         cache: true,
@@ -23,9 +26,9 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       algorithms: ["RS256"],
     });
   }
-
-  async validate(payload: { "http://localhost/email": string }) {
-    const email = payload["https://localhost/email"];
-    return this.authService.validateByEmail(email);
+  async validate(payload: unknown) {
+    const email: string =
+      payload[this.configService.get<string>("EMAIL_TO_ACCESS_TOKEN_LINK")];
+    return this.authService.validateByEmailOrCreateUser(email);
   }
 }

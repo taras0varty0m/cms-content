@@ -44,7 +44,6 @@ import { ContentGroup } from "./entities/content-group.entity";
   property: "user",
   persist: (user: RequestUserDto) => ({
     userId: user.id,
-    href: `${Math.random() * 1e10}`,
   }),
 })
 @ApiTags("content-group")
