@@ -7,6 +7,7 @@ import {
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { ConfigService } from "@nestjs/config";
 import { v4 as uuid } from "uuid";
+import { GetUploadLinkDto } from "./dto/get-upload-link.dto";
 
 @Injectable()
 export class S3Service {
@@ -24,10 +25,11 @@ export class S3Service {
 
   private bucket = this.configService.get<string>("S3_BUCKET");
 
-  async getSignedUploadUrl(
-    filename: string
-  ): Promise<{ url: string; fileKey: string }> {
-    const fileKey = `${uuid()}-${filename}`;
+  async getSignedUploadUrl({
+    filename,
+    extension,
+  }: GetUploadLinkDto): Promise<{ url: string; fileKey: string }> {
+    const fileKey = `${uuid()}-${filename}.${extension}`;
 
     const putFileCommand = new PutObjectCommand({
       Bucket: this.bucket,

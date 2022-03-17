@@ -1,6 +1,8 @@
 import {
+  Body,
   Controller,
   Get,
+  Post,
   Query,
   UseGuards,
   UseInterceptors,
@@ -13,7 +15,10 @@ import { AddHrefToResponseInterceptor } from "./add-href-to-response.interceptor
 import { ContentsService } from "./contents.service";
 import { ContentDto } from "./dto/content.dto";
 import { CreateContentDto } from "./dto/create-content.dto";
-import { GetUploadLinkResponseDto } from "./dto/get-upload-link.dto";
+import {
+  GetUploadLinkDto,
+  GetUploadLinkResponseDto,
+} from "./dto/get-upload-link.dto";
 import { UpdateContentDto } from "./dto/update-content.dto";
 import { EditContentsGuard } from "./edit-contents.guard";
 import { Content } from "./entities/content.entity";
@@ -88,15 +93,15 @@ import { S3Service } from "./s3.service";
 export class ContentsController implements CrudController<Content> {
   constructor(public service: ContentsService, public s3: S3Service) {}
 
-  @Get("/upload-s3-file-link/:filename")
+  @Post("/upload-s3-file-link")
   @ApiResponse({
     type: GetUploadLinkResponseDto,
     description: "Signed S3 link for file uploading",
     status: 201,
   })
   public async getUploadLink(
-    @Query("filename") filename: string
+    @Body() body: GetUploadLinkDto
   ): Promise<GetUploadLinkResponseDto> {
-    return this.s3.getSignedUploadUrl(filename);
+    return this.s3.getSignedUploadUrl(body);
   }
 }
