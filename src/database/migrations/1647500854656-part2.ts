@@ -31,6 +31,7 @@ export class part21647500854656 implements MigrationInterface {
           {
             name: "type",
             type: "varchar(32)",
+            default: "'default'",
           },
           {
             name: "userId",
@@ -51,7 +52,7 @@ export class part21647500854656 implements MigrationInterface {
     );
 
     await queryRunner.query(
-      'INSERT INTO "content_groups" (id, "type", "userId")  SELECT id, "type", "userId" FROM "content";'
+      'INSERT INTO "content_groups" (id, "userId")  SELECT id, "userId" FROM "content";'
     );
 
     await queryRunner.addColumns("content", [
@@ -81,7 +82,7 @@ export class part21647500854656 implements MigrationInterface {
       })
     );
 
-    await queryRunner.dropColumns("content", ["type", "userId"]);
+    await queryRunner.dropColumns("content", ["userId"]);
     await queryRunner.addColumn(
       "playlist_content",
       new TableColumn({
@@ -104,15 +105,6 @@ export class part21647500854656 implements MigrationInterface {
       })
     );
 
-    await queryRunner.addColumn(
-      "content",
-      new TableColumn({
-        isUnique: true,
-        isNullable: false,
-        name: "fileKey",
-        type: "varchar(64)",
-      })
-    );
     await queryRunner.dropColumn("content", "href");
 
     await queryRunner.createUniqueConstraint(
