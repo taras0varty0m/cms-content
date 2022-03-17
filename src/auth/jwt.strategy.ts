@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { passportJwtSecret } from "jwks-rsa";
@@ -29,6 +29,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   async validate(payload: unknown) {
     const email: string =
       payload[this.configService.get<string>("EMAIL_TO_ACCESS_TOKEN_LINK")];
+    if (!email) throw new UnauthorizedException("Cannot validate token");
     return this.authService.validateByEmailOrCreateUser(email);
   }
 }
