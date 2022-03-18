@@ -1,15 +1,11 @@
 import { IsDefined, IsEnum, MaxLength } from "class-validator";
-import { Extensions } from "./extensions.enum";
+import { IsAcceptableFileExtension } from "./IsAcceptableFileExtension";
 
 export class GetUploadLinkDto {
   @IsDefined()
   @MaxLength(64)
+  @IsAcceptableFileExtension()
   filename: string;
-
-  @IsDefined()
-  @MaxLength(64)
-  @IsEnum(Extensions)
-  extension: Extensions;
 }
 export class GetUploadLinkResponseDto {
   url: string;

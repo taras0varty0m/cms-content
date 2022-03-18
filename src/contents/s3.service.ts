@@ -27,9 +27,8 @@ export class S3Service {
 
   async getSignedUploadUrl({
     filename,
-    extension,
   }: GetUploadLinkDto): Promise<{ url: string; fileKey: string }> {
-    const fileKey = `${uuid()}-${filename}.${extension}`;
+    const fileKey = `${uuid()}-${filename}`;
 
     const putFileCommand = new PutObjectCommand({
       Bucket: this.bucket,
