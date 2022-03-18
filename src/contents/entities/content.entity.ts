@@ -1,4 +1,5 @@
 import { ApiHideProperty } from "@nestjs/swagger";
+import { ContentGroup } from "src/content-group/entities/content-group.entity";
 import { PlaylistContent } from "src/playlist-content/entities/playlist-content.entity";
 import { User } from "src/users/entities/user.entity";
 import {
@@ -16,12 +17,18 @@ export class Content extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @ApiHideProperty()
-  @Column()
-  href: string;
-
   @Column()
   fileKey: string;
+
+  @ApiHideProperty()
+  @ManyToOne(() => ContentGroup, (group) => group.contents, {
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
+  })
+  group?: ContentGroup;
+
+  @Column()
+  groupId: string;
 
   @ApiHideProperty()
   @ManyToOne(() => User, (user) => user.id, {
